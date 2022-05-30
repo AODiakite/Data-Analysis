@@ -1,8 +1,0 @@
-"0","library(dplyr)"
-"0","# Train_Test_Splite"
-"0","set.seed(1345)"
-"0","# Pourcentage de donnees correspondant a 25%"
-"0","per = dim(Communities)[1]%/%4"
-"0","echantillon <- sample(1:dim(Communities)[1]) %>% .[1:per]"
-"0","lmDataTrain = Communities[-echantillon,c(""murders"",""persPoverty"")]"
-"0","lmDataTest = Communities[echantillon,c(""murders"",""persPoverty"")]"
