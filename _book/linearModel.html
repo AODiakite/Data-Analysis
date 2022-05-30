@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Régression linéaire | Annalyse de données</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Régression linéaire | Annalyse de données" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Régression linéaire | Annalyse de données" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Abdoul Oudouss Diakite, Othmane ETTADLAOUI" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="linearModel.html"><a href="linearModel.html"><i class="fa fa-check"></i><b>1</b> Régression linéaire</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="linearModel.html"><a href="linearModel.html#introduction-1"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="linearModel.html"><a href="linearModel.html#application-de-la-régression-linéaire-simple"><i class="fa fa-check"></i><b>1.2</b> Application de la régression linéaire simple</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Annalyse de données</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linearModel" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Régression linéaire<a href="linearModel.html#linearModel" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-1" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Introduction<a href="linearModel.html#introduction-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La régression lineaire est une méthode statistique qui permet de trouver une relation lineaire entre des variables quantitives, une à expliquer et d’autres explicatives. C’est en fait un ajustement affine de la forme :</p>
+<span class="math display">\[\begin{equation}
+y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} +\dots+\beta_px_{ip}+\epsilon_{i}\;\;
+\end{equation}\]</span>
+<p><span class="math display">\[i\in\{1,2,3\dots,n\}\]</span></p>
+<ul>
+<li><span class="math inline">\(y_i\)</span> représentent la <span class="math inline">\(i\)</span>ème valeur de la variable dépendantes <span class="math inline">\(y\)</span>.</li>
+<li><span class="math inline">\(x_{ij}\)</span> représente la mesure de la <span class="math inline">\(i\)</span>ème observation de la variable explicative <span class="math inline">\(X_j\)</span></li>
+<li>les <span class="math inline">\(\beta_j\)</span> sont les paramètres inconnus du modèle à estimer</li>
+<li><span class="math inline">\(\epsilon_i\)</span> représente le bruit associé à la <span class="math inline">\(i\)</span>ème observation<br />
+</li>
+</ul>
+<p>L’équation précédente peut être écrite sous une forme matricielle de cette manière :<br />
+</p>
+<span class="math display">\[\begin{equation}
+y = X\beta +\epsilon
+\end{equation}\]</span>
+<p>avec :<br />
+</p>
+<span class="math display">\[\begin{equation}
+y = \begin{pmatrix}y_1\\y_2\\\vdots\\y_n \end{pmatrix} \;\;
+X = \begin{pmatrix}
+   1 &amp; x_{11} &amp; x_{12} &amp; \dots &amp;x_{1p}\\
+   1 &amp; x_{21} &amp; x_{22} &amp; \dots &amp;x_{2p}\\
+   \vdots &amp;\vdots&amp;\vdots &amp; &amp;\vdots\\
+   1 &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp;x_{np}
+   \end{pmatrix} \;\;
+\beta = \begin{pmatrix}\beta_0\\
+   \beta_1\\
+   \vdots\\
+   \beta_n \end{pmatrix} \;\;
+\epsilon = \begin{pmatrix}
+   \epsilon_1\\
+   \epsilon_2\\
+   \vdots\\
+   \epsilon_n \end{pmatrix} \;\;
+\end{equation}\]</span>
+<p><br />
+</p>
+<p>Commençons par importer le jeu de données que nous nommerons <span class="math inline">\(dfcom\)</span>:<br />
+</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="linearModel.html#cb1-1" aria-hidden="true" tabindex="-1"></a>Communities <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Communities.csv&quot;</span>,<span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="4%" />
+<col width="7%" />
+<col width="9%" />
+<col width="3%" />
+<col width="4%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">communityname</th>
+<th align="left">State</th>
+<th align="left">countyCode</th>
+<th align="left">communityCode</th>
+<th align="right">fold</th>
+<th align="right">pop</th>
+<th align="right">perHoush</th>
+<th align="right">pctBlack</th>
+<th align="right">pctWhite</th>
+<th align="right">pctAsian</th>
+<th align="right">pctHisp</th>
+<th align="right">pct12.21</th>
+<th align="right">pct12.29</th>
+<th align="right">pct16.24</th>
+<th align="right">pct65up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">BerkeleyHeightstownship</td>
+<td align="left">NJ</td>
+<td align="left">39</td>
+<td align="left">5320</td>
+<td align="right">1</td>
+<td align="right">11980</td>
+<td align="right">3.10</td>
+<td align="right">1.37</td>
+<td align="right">91.78</td>
+<td align="right">6.50</td>
+<td align="right">1.88</td>
+<td align="right">12.47</td>
+<td align="right">21.44</td>
+<td align="right">10.93</td>
+<td align="right">11.33</td>
+</tr>
+<tr class="even">
+<td align="left">Marpletownship</td>
+<td align="left">PA</td>
+<td align="left">45</td>
+<td align="left">47616</td>
+<td align="right">1</td>
+<td align="right">23123</td>
+<td align="right">2.82</td>
+<td align="right">0.80</td>
+<td align="right">95.57</td>
+<td align="right">3.44</td>
+<td align="right">0.85</td>
+<td align="right">11.01</td>
+<td align="right">21.30</td>
+<td align="right">10.48</td>
+<td align="right">17.18</td>
+</tr>
+<tr class="odd">
+<td align="left">Tigardcity</td>
+<td align="left">OR</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="right">1</td>
+<td align="right">29344</td>
+<td align="right">2.43</td>
+<td align="right">0.74</td>
+<td align="right">94.33</td>
+<td align="right">3.43</td>
+<td align="right">2.35</td>
+<td align="right">11.36</td>
+<td align="right">25.88</td>
+<td align="right">11.01</td>
+<td align="right">10.28</td>
+</tr>
+<tr class="even">
+<td align="left">Gloversvillecity</td>
+<td align="left">NY</td>
+<td align="left">35</td>
+<td align="left">29443</td>
+<td align="right">1</td>
+<td align="right">16656</td>
+<td align="right">2.40</td>
+<td align="right">1.70</td>
+<td align="right">97.35</td>
+<td align="right">0.50</td>
+<td align="right">0.70</td>
+<td align="right">12.55</td>
+<td align="right">25.20</td>
+<td align="right">12.19</td>
+<td align="right">17.57</td>
+</tr>
+<tr class="odd">
+<td align="left">Bemidjicity</td>
+<td align="left">MN</td>
+<td align="left">7</td>
+<td align="left">5068</td>
+<td align="right">1</td>
+<td align="right">11245</td>
+<td align="right">2.76</td>
+<td align="right">0.53</td>
+<td align="right">89.16</td>
+<td align="right">1.17</td>
+<td align="right">0.52</td>
+<td align="right">24.46</td>
+<td align="right">40.53</td>
+<td align="right">28.69</td>
+<td align="right">12.65</td>
+</tr>
+<tr class="even">
+<td align="left">Springfieldcity</td>
+<td align="left">MO</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="right">1</td>
+<td align="right">140494</td>
+<td align="right">2.45</td>
+<td align="right">2.51</td>
+<td align="right">95.65</td>
+<td align="right">0.90</td>
+<td align="right">0.95</td>
+<td align="right">18.09</td>
+<td align="right">32.89</td>
+<td align="right">20.04</td>
+<td align="right">13.26</td>
+</tr>
+<tr class="odd">
+<td align="left">Norwoodtown</td>
+<td align="left">MA</td>
+<td align="left">21</td>
+<td align="left">50250</td>
+<td align="right">1</td>
+<td align="right">28700</td>
+<td align="right">2.60</td>
+<td align="right">1.60</td>
+<td align="right">96.57</td>
+<td align="right">1.47</td>
+<td align="right">1.10</td>
+<td align="right">11.17</td>
+<td align="right">27.41</td>
+<td align="right">12.76</td>
+<td align="right">14.42</td>
+</tr>
+<tr class="even">
+<td align="left">Andersoncity</td>
+<td align="left">IN</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="right">1</td>
+<td align="right">59459</td>
+<td align="right">2.45</td>
+<td align="right">14.20</td>
+<td align="right">84.87</td>
+<td align="right">0.40</td>
+<td align="right">0.63</td>
+<td align="right">15.31</td>
+<td align="right">27.93</td>
+<td align="right">14.78</td>
+<td align="right">14.60</td>
+</tr>
+<tr class="odd">
+<td align="left">Fargocity</td>
+<td align="left">ND</td>
+<td align="left">17</td>
+<td align="left">25700</td>
+<td align="right">1</td>
+<td align="right">74111</td>
+<td align="right">2.46</td>
+<td align="right">0.35</td>
+<td align="right">97.11</td>
+<td align="right">1.25</td>
+<td align="right">0.73</td>
+<td align="right">16.64</td>
+<td align="right">35.16</td>
+<td align="right">20.33</td>
+<td align="right">8.58</td>
+</tr>
+<tr class="even">
+<td align="left">Wacocity</td>
+<td align="left">TX</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="right">1</td>
+<td align="right">103590</td>
+<td align="right">2.62</td>
+<td align="right">23.14</td>
+<td align="right">67.60</td>
+<td align="right">0.92</td>
+<td align="right">16.35</td>
+<td align="right">19.88</td>
+<td align="right">34.55</td>
+<td align="right">21.62</td>
+<td align="right">13.12</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="application-de-la-régression-linéaire-simple" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Application de la régression linéaire simple<a href="linearModel.html#application-de-la-régression-linéaire-simple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Comme nous l’avons mentionner dans l’introduction, le but de se projet est d’expliquer de différentes manières les meurtes aux USA. Par conséquent, on peut choisir comme variable dépendante, les crimes(<code>murders</code>) et chercher les variables explicatives. Dans le cas de le régression linéaire simple il doit exister une corrélation assez importante entre la variable <span class="math inline">\(y\)</span>(<code>muders</code>) et <span class="math inline">\(X\)</span> que nous recherchons actuellement. DOnc commençons par filtrer les fortes corrélation avec la variable <span class="math inline">\(y\)</span> dans notre jeu de données.<br />
+</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="linearModel.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb2-2"><a href="linearModel.html#cb2-2" aria-hidden="true" tabindex="-1"></a>corCom <span class="ot">=</span> correlation<span class="sc">::</span><span class="fu">correlation</span>(Communities)</span>
+<span id="cb2-3"><a href="linearModel.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtered correlation, bound =0.8</span></span>
+<span id="cb2-4"><a href="linearModel.html#cb2-4" aria-hidden="true" tabindex="-1"></a>corCom[(corCom<span class="sc">$</span>r<span class="sc">&gt;</span><span class="fl">0.8</span>) <span class="sc">&amp;</span> corCom<span class="sc">$</span>Parameter2<span class="sc">==</span><span class="st">&#39;murders&#39;</span>,]</span></code></pre></div>
+<pre><code>## # Correlation Matrix (pearson-method)
+## 
+## Parameter1       | Parameter2 |    r |       95% CI | t(2213) |         p
+## -------------------------------------------------------------------------
+## pop              |    murders | 0.96 | [0.96, 0.96] |  159.80 | &lt; .001***
+## persUrban        |    murders | 0.96 | [0.95, 0.96] |  156.13 | &lt; .001***
+## persPoverty      |    murders | 0.98 | [0.97, 0.98] |  211.42 | &lt; .001***
+## kidsBornNevrMarr |    murders | 0.98 | [0.98, 0.98] |  221.27 | &lt; .001***
+## numForeignBorn   |    murders | 0.89 | [0.88, 0.90] |   92.94 | &lt; .001***
+## houseVacant      |    murders | 0.90 | [0.89, 0.90] |   95.29 | &lt; .001***
+## persEmergShelt   |    murders | 0.89 | [0.88, 0.90] |   93.14 | &lt; .001***
+## persHomeless     |    murders | 0.85 | [0.84, 0.86] |   76.49 | &lt; .001***
+## 
+## p-value adjustment method: Holm (1979)
+## Observations: 2215</code></pre>
+<p>Le tableau précédent indique les variables fortement corrélées avec notre <span class="math inline">\(output\)</span> <code>murders</code>. Prenons l’exemple de la variable <code>persPoverty</code> qui représente le nombre de personnes sous le seuil de pauvreté.<br />
+</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="linearModel.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="linearModel.html#cb4-2" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data =</span> Communities,<span class="fu">aes</span>(<span class="at">x=</span>persPoverty,<span class="at">y=</span>murders))<span class="sc">+</span></span>
+<span id="cb4-3"><a href="linearModel.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb4-4"><a href="linearModel.html#cb4-4" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>La figure précédente laisse parraître qu’il pourrait effectivement exister une relation linéaire entre <code>murders</code> et <code>persPoverty</code>. Appliquons la fonction <code>lm()</code> pour voir ce qu’il en est vraiment ! Pour faire une analyse des résidus pltard, nous n’entrainerons que <span class="math inline">\(75\%\)</span> du jeu de données et le reste servira à la prédiction.<br />
+</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="linearModel.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="linearModel.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train_Test_Splite</span></span>
+<span id="cb9-2"><a href="linearModel.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1345</span>)</span>
+<span id="cb9-3"><a href="linearModel.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pourcentage de donnees correspondant a 25%</span></span>
+<span id="cb9-4"><a href="linearModel.html#cb9-4" aria-hidden="true" tabindex="-1"></a>per <span class="ot">=</span> <span class="fu">dim</span>(Communities)[<span class="dv">1</span>]<span class="sc">%/%</span><span class="dv">4</span></span>
+<span id="cb9-5"><a href="linearModel.html#cb9-5" aria-hidden="true" tabindex="-1"></a>echantillon <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(Communities)[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> .[<span class="dv">1</span><span class="sc">:</span>per]</span>
+<span id="cb9-6"><a href="linearModel.html#cb9-6" aria-hidden="true" tabindex="-1"></a>lmDataTrain <span class="ot">=</span> Communities[<span class="sc">-</span>echantillon,<span class="fu">c</span>(<span class="st">&quot;murders&quot;</span>,<span class="st">&quot;persPoverty&quot;</span>)]</span>
+<span id="cb9-7"><a href="linearModel.html#cb9-7" aria-hidden="true" tabindex="-1"></a>lmDataTest <span class="ot">=</span> Communities[echantillon,<span class="fu">c</span>(<span class="st">&quot;murders&quot;</span>,<span class="st">&quot;persPoverty&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="linearModel.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model Training</span></span>
+<span id="cb10-2"><a href="linearModel.html#cb10-2" aria-hidden="true" tabindex="-1"></a>lmSimple <span class="ot">&lt;-</span> <span class="fu">lm</span>(murders<span class="sc">~</span>persPoverty,<span class="at">data =</span> lmDataTrain)</span>
+<span id="cb10-3"><a href="linearModel.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmSimple)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = murders ~ persPoverty, data = lmDataTrain)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -136.43   -1.13    1.32    2.52  317.80 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -3.271e+00  3.340e-01  -9.796   &lt;2e-16 ***
+## persPoverty  1.449e-03  7.447e-06 194.519   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 13.4 on 1660 degrees of freedom
+## Multiple R-squared:  0.958,  Adjusted R-squared:  0.9579 
+## F-statistic: 3.784e+04 on 1 and 1660 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>La sortie de la fonction <code>summary()</code> indique des <span class="math inline">\(p-values\)</span> très inférieures à <span class="math inline">\(5\%\)</span>, donc on rejette l’hypothèse de nullité des <span class="math inline">\(\beta\)</span>. On peut aussi constater que le coefficient de détermination <span class="math inline">\(R^2\)</span> vaut <span class="math inline">\(0.958\)</span> ce qui signifie que notre modèle a un score de <span class="math inline">\(95.8\%\)</span>. Ce dernier reflète une bonne qualité du modèle.<br />
+</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="linearModel.html#cb12-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggscatterstats</span>(</span>
+<span id="cb12-2"><a href="linearModel.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> lmDataTrain, </span>
+<span id="cb12-3"><a href="linearModel.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> persPoverty, </span>
+<span id="cb12-4"><a href="linearModel.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> murders,</span>
+<span id="cb12-5"><a href="linearModel.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab  =</span> <span class="st">&quot;le nombre de personnes sous le seuil de pauvreté&quot;</span>,</span>
+<span id="cb12-6"><a href="linearModel.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab  =</span> <span class="st">&quot;le nombre de meurtres&quot;</span>,</span>
+<span id="cb12-7"><a href="linearModel.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Droite de régression&quot;</span>,</span>
+<span id="cb12-8"><a href="linearModel.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
+<span id="cb12-9"><a href="linearModel.html#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Registered S3 method overwritten by &#39;ggside&#39;:
+##   method from   
+##   +.gg   ggplot2</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>A présent, nous pouvons utiliser notre échantillon non entrainé de données pour prédire à partir de notre model, quel aurait était le nombre de meurtres pour chauque <span class="math inline">\(x_i\)</span>.<br />
+</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="linearModel.html#cb15-1" aria-hidden="true" tabindex="-1"></a>X_test<span class="ot">=</span><span class="fu">as.data.frame</span>(lmDataTest[[<span class="st">&quot;persPoverty&quot;</span>]])</span>
+<span id="cb15-2"><a href="linearModel.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X_test)<span class="ot">=</span><span class="st">&quot;persPoverty&quot;</span></span>
+<span id="cb15-3"><a href="linearModel.html#cb15-3" aria-hidden="true" tabindex="-1"></a>y_predict <span class="ot">=</span> <span class="fu">predict</span>(<span class="at">object =</span> lmSimple,X_test)</span></code></pre></div>
+<p>On peut représenter le graphe des <span class="math inline">\(\hat y\)</span> prédits et des <span class="math inline">\(y\)</span>. Pour un modèle parfait, le nuage de point doit être sur la première bissectrice.<br />
+</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="linearModel.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span>lmDataTest) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="linearModel.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(persPoverty,murders),<span class="at">color =</span> <span class="st">&#39;darkgreen&#39;</span>,</span>
+<span id="cb16-3"><a href="linearModel.html#cb16-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span><span class="dv">2</span>,<span class="at">shape=</span><span class="dv">22</span>,<span class="at">fill =</span><span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="linearModel.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> persPoverty, <span class="at">y =</span>y_predict), <span class="at">color =</span><span class="st">&#39;blue&#39;</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="linearModel.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span>persPoverty , </span>
+<span id="cb16-6"><a href="linearModel.html#cb16-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> murders, <span class="at">xend =</span> persPoverty, <span class="at">yend =</span> y_predict),</span>
+<span id="cb16-7"><a href="linearModel.html#cb16-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="_main_files/figure-html/unnamed-chunk-9-1.png" alt="Les segments en rouges représentent les résidus, les carrés verts les y non entrainés qui ont servi au test et les points bleus représentent les y prédits à partir de notre modèle." width="576" />
+<p class="caption">
+Figure 1.1: Les segments en rouges représentent les résidus, les carrés verts les y non entrainés qui ont servi au test et les points bleus représentent les y prédits à partir de notre modèle.
+</p>
+</div>
+<p>On peut aussi visualiser la répartition des résidus du modèle <code>lmSimple</code> autour de leur moyenne <span class="math inline">\(0\)</span>.<br />
+</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="linearModel.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lmSimple<span class="sc">$</span>residuals)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="_main_files/figure-html/unnamed-chunk-10-1.png" alt="On constate une répartition des résidus autour de 0" width="576" />
+<p class="caption">
+Figure 1.2: On constate une répartition des résidus autour de 0
+</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-LinearModel.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

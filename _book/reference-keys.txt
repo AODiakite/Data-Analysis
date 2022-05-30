@@ -1,0 +1,5 @@
+fig:unnamed-chunk-9
+fig:unnamed-chunk-10
+linearModel
+introduction-1
+application-de-la-régression-linéaire-simple

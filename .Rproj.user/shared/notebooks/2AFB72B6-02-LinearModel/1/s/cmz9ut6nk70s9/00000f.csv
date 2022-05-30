@@ -1,0 +1,4 @@
+"0","library(ggplot2)"
+"0","fig = ggplot(data = Communities,aes(x=persPoverty,y=murders))+"
+"0","  geom_point()"
+"0","fig"

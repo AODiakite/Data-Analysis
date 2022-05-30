@@ -1,0 +1,7 @@
+"0",""
+"0","ggplot(data =lmDataTest) +"
+"0","  geom_point(aes(persPoverty,murders),color = 'darkgreen',size =2,shape=22,fill =""darkgreen"") +"
+"0","  geom_point(aes(x = persPoverty, y =y_predict), color ='blue') +"
+"0","  geom_segment(aes(x =persPoverty , "
+"0","                   y = murders, xend = persPoverty, yend = y_predict),"
+"0","               color = 'red')"

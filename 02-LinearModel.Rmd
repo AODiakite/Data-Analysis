@@ -1,0 +1,136 @@
+# Régression linéaire{#linearModel}
+## Introduction
+La régression lineaire est une méthode statistique qui permet de trouver une relation lineaire entre des variables quantitives, une à expliquer et d'autres explicatives. C'est en fait un ajustement affine de la forme :
+```{=tex}
+\begin{equation}
+y_i = \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} +\dots+\beta_px_{ip}+\epsilon_{i}\;\; 
+\end{equation}
+```
+$$i\in\{1,2,3\dots,n\}$$
+
+*   $y_i$ représentent la $i$ème valeur de la variable dépendantes $y$.
+*   $x_{ij}$ représente la mesure de la $i$ème observation de la variable explicative $X_j$
+*   les $\beta_j$ sont les paramètres inconnus du modèle à estimer
+*   $\epsilon_i$ représente le bruit associé à la $i$ème observation\
+
+L'équation précédente peut être écrite sous une forme matricielle de cette manière :\
+
+```{=tex}
+\begin{equation}
+y = X\beta +\epsilon
+\end{equation}
+```
+
+avec :\
+
+```{=tex}
+\begin{equation}
+y = \begin{pmatrix}y_1\\y_2\\\vdots\\y_n \end{pmatrix} \;\; 
+X = \begin{pmatrix}
+   1 & x_{11} & x_{12} & \dots &x_{1p}\\
+   1 & x_{21} & x_{22} & \dots &x_{2p}\\
+   \vdots &\vdots&\vdots & &\vdots\\
+   1 & x_{n1} & x_{n2} & \dots &x_{np}
+   \end{pmatrix} \;\;
+\beta = \begin{pmatrix}\beta_0\\
+   \beta_1\\
+   \vdots\\
+   \beta_n \end{pmatrix} \;\;
+\epsilon = \begin{pmatrix}
+   \epsilon_1\\
+   \epsilon_2\\
+   \vdots\\
+   \epsilon_n \end{pmatrix} \;\;
+\end{equation}
+```
+\
+
+Commençons par importer le jeu de données que nous nommerons $dfcom$:\
+
+```{r}
+Communities = read.csv("data/Communities.csv",row.names = 1)
+
+```
+```{r,echo=FALSE}
+knitr::kable(head(Communities,10)[,1:15])
+```
+
+## Application de la régression linéaire simple
+
+Comme nous l'avons mentionner dans l'introduction, le but de se projet est d'expliquer de différentes manières les meurtes aux USA. Par conséquent, on peut choisir comme variable dépendante, les crimes(`murders`) et chercher les variables explicatives. Dans le cas de le régression linéaire simple il doit exister une corrélation assez importante entre la variable $y$(`muders`) et $X$ que nous recherchons actuellement. DOnc commençons par filtrer les fortes corrélation avec la variable $y$ dans notre jeu de données.\
+
+```{r}
+# Correlation matrix
+corCom = correlation::correlation(Communities)
+# Filtered correlation, bound =0.8
+corCom[(corCom$r>0.8) & corCom$Parameter2=='murders',]
+```
+
+Le tableau précédent indique les variables fortement corrélées avec notre $output$ `murders`. Prenons l'exemple de la variable `persPoverty` qui représente le nombre de personnes sous le seuil de pauvreté.\
+
+```{r message=FALSE, warning=FALSE,fig.asp = 0.7, fig.width = 6, fig.align = 'center'}
+library(ggplot2)
+fig = ggplot(data = Communities,aes(x=persPoverty,y=murders))+
+  geom_point()
+fig
+```
+
+La figure précédente laisse parraître qu'il pourrait effectivement exister une relation linéaire entre `murders` et `persPoverty`. Appliquons la fonction `lm()` pour voir ce qu'il en est vraiment ! Pour faire une analyse des résidus pltard, nous n'entrainerons que $75\%$ du jeu de données et le reste servira à la prédiction.\
+
+```{r}
+library(dplyr)
+# Train_Test_Splite
+set.seed(1345)
+# Pourcentage de donnees correspondant a 25%
+per = dim(Communities)[1]%/%4
+echantillon <- sample(1:dim(Communities)[1]) %>% .[1:per]
+lmDataTrain = Communities[-echantillon,c("murders","persPoverty")]
+lmDataTest = Communities[echantillon,c("murders","persPoverty")]
+```
+```{r}
+#Model Training
+lmSimple <- lm(murders~persPoverty,data = lmDataTrain)
+summary(lmSimple)
+```
+
+La sortie de la fonction `summary()` indique des $p-values$ très inférieures à $5\%$, donc on rejette l'hypothèse de nullité des $\beta$. On peut aussi constater que le coefficient de détermination $R^2$ vaut $0.958$ ce qui signifie que notre modèle a un score de $95.8\%$. Ce dernier reflète une bonne qualité du modèle.\
+
+```{r}
+ggstatsplot::ggscatterstats(
+  data = lmDataTrain, 
+  x = persPoverty, 
+  y = murders,
+  xlab  = "le nombre de personnes sous le seuil de pauvreté",
+  ylab  = "le nombre de meurtres",
+  title = "Droite de régression",
+  messages = FALSE
+)
+```
+
+
+A présent, nous pouvons utiliser notre échantillon non entrainé de données pour prédire à partir de notre model, quel aurait était le nombre de meurtres pour chauque $x_i$.\
+
+```{r}
+X_test=as.data.frame(lmDataTest[["persPoverty"]])
+colnames(X_test)="persPoverty"
+y_predict = predict(object = lmSimple,X_test)
+```
+
+On peut représenter le graphe des $\hat y$ prédits et des $y$. Pour un modèle parfait, le nuage de point doit être sur la première bissectrice.\
+
+```{r,,fig.cap="Les segments en rouges représentent les résidus, les carrés verts les y non entrainés qui ont servi au test et les points bleus représentent les y prédits à partir de notre modèle.",fig.asp = 0.7, fig.width = 6,  fig.align = 'center'}
+
+ggplot(data =lmDataTest) +
+  geom_point(aes(persPoverty,murders),color = 'darkgreen',
+             size =2,shape=22,fill ="darkgreen") +
+  geom_point(aes(x = persPoverty, y =y_predict), color ='blue') +
+  geom_segment(aes(x =persPoverty , 
+                   y = murders, xend = persPoverty, yend = y_predict),
+               color = 'red')
+```
+
+On peut aussi visualiser la répartition des résidus du modèle `lmSimple` autour de leur moyenne $0$.\
+
+```{r,fig.cap="On constate une répartition des résidus autour de 0",fig.asp = 0.7, fig.width = 6, fig.align = 'center'}
+plot(lmSimple$residuals)
+```
