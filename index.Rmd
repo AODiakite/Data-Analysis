@@ -10,7 +10,7 @@ bibliography: [book.bib, packages.bib]
 description: |
   Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de     crime aux Etats-Unis.
 link-citations: yes
-github-repo: https://github.com/AODiakite/Data-Analysis
+github-repo: AODiakite/Data-Analysis
 ---
 # Introduction{-} 
 
