@@ -77,11 +77,11 @@
             "issued": {
                 "date-parts": [
                     [
-                        2022
+                        2021
                     ]
                 ]
             },
-            "note": "R package version 1.39",
+            "note": "R package version 1.37",
             "title": "Knitr: A general-purpose package for dynamic report generation in r",
             "title-short": "Knitr",
             "type": "book"

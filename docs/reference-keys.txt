@@ -1,5 +1,10 @@
-fig:unnamed-chunk-9
-fig:unnamed-chunk-10
+fig:unnamed-chunk-13
+fig:unnamed-chunk-14
+fig:unnamed-chunk-20
 linearModel
 introduction-1
 application-de-la-régression-linéaire-simple
+application-de-la-régression-linéaire-multiple
+graphe-des-résidus
+principal-component-analysis-and-factor-analysis
+lanalyse-de-la-variance

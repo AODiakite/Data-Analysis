@@ -1,4 +1,14 @@
 h1:linearModel Régression linéaire
 h2:introduction Introduction
 h2:application-de-la-régression-linéaire-simple Application de la régression linéaire simple
+h3:corrélation Corrélation
+h3:nuage-de-points Nuage de points
+h3:entraînement-de-modèle-droite-de-régression Entraînement de modèle & Droite de régression
+h3:prédiction Prédiction
+h3:graphes-des-résidus Graphes des résidus
+h2:application-de-la-régression-linéaire-multiple Application de la régression linéaire multiple
+h3:entraînement-de-modèle Entraînement de modèle
+h3:graphes-de-régression Graphes de régression
+h3:prédiction-1 Prédiction
+h3:graphe-des-résidus Graphe des résidus
 

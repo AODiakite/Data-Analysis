@@ -56,8 +56,9 @@ knitr::kable(head(Communities,10)[,1:15])
 ```
 
 ## Application de la régression linéaire simple
+### Corrélation{-}
 
-Comme nous l'avons mentionner dans l'introduction, le but de se projet est d'expliquer de différentes manières les meurtes aux USA. Par conséquent, on peut choisir comme variable dépendante, les crimes(`murders`) et chercher les variables explicatives. Dans le cas de le régression linéaire simple il doit exister une corrélation assez importante entre la variable $y$(`muders`) et $X$ que nous recherchons actuellement. DOnc commençons par filtrer les fortes corrélation avec la variable $y$ dans notre jeu de données.\
+Comme nous l'avons mentionner dans l'introduction, le but de se projet est d'expliquer de différentes manières les meurtes aux USA. Par conséquent, on peut choisir comme variable dépendante, les crimes(`murders`) et chercher les variables explicatives. Dans le cas de le régression linéaire simple il doit exister une corrélation assez importante entre la variable $y$(`muders`) et $X$ que nous recherchons actuellement. Donc commençons par filtrer les fortes corrélation avec la variable $y$ dans notre jeu de données.\
 
 ```{r}
 # Correlation matrix
@@ -65,6 +66,8 @@ corCom = correlation::correlation(Communities)
 # Filtered correlation, bound =0.8
 corCom[(corCom$r>0.8) & corCom$Parameter2=='murders',]
 ```
+
+### Nuage de points{-}
 
 Le tableau précédent indique les variables fortement corrélées avec notre $output$ `murders`. Prenons l'exemple de la variable `persPoverty` qui représente le nombre de personnes sous le seuil de pauvreté.\
 
@@ -75,9 +78,10 @@ fig = ggplot(data = Communities,aes(x=persPoverty,y=murders))+
 fig
 ```
 
+### Entraînement de modèle & Droite de régression{-}
 La figure précédente laisse parraître qu'il pourrait effectivement exister une relation linéaire entre `murders` et `persPoverty`. Appliquons la fonction `lm()` pour voir ce qu'il en est vraiment ! Pour faire une analyse des résidus pltard, nous n'entrainerons que $75\%$ du jeu de données et le reste servira à la prédiction.\
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(dplyr)
 # Train_Test_Splite
 set.seed(1345)
@@ -107,6 +111,7 @@ ggstatsplot::ggscatterstats(
 )
 ```
 
+### Prédiction{-}
 
 A présent, nous pouvons utiliser notre échantillon non entrainé de données pour prédire à partir de notre model, quel aurait était le nombre de meurtres pour chauque $x_i$.\
 
@@ -116,6 +121,7 @@ colnames(X_test)="persPoverty"
 y_predict = predict(object = lmSimple,X_test)
 ```
 
+### Graphes des résidus{-}
 On peut représenter le graphe des $\hat y$ prédits et des $y$. Pour un modèle parfait, le nuage de point doit être sur la première bissectrice.\
 
 ```{r,,fig.cap="Les segments en rouges représentent les résidus, les carrés verts les y non entrainés qui ont servi au test et les points bleus représentent les y prédits à partir de notre modèle.",fig.asp = 0.7, fig.width = 6,  fig.align = 'center'}
@@ -134,3 +140,82 @@ On peut aussi visualiser la répartition des résidus du modèle `lmSimple` auto
 ```{r,fig.cap="On constate une répartition des résidus autour de 0",fig.asp = 0.7, fig.width = 6, fig.align = 'center'}
 plot(lmSimple$residuals)
 ```
+
+## Application de la régression linéaire multiple
+
+Dans cette partie on peut s’intéresser à la relation entre le nombre de meurtres et plusieurs autres variables. Un modèle de régression linéaire multiple pourrait faire l’affaire. Comme dans le cas de la régression linéaire simple, on va commencer par étudier la corrélation entre les variables explicatives. Nous allons choisir dans notre exemple,  les variables qui sont corrélées avec `murders` comme varioles indépendantes.\
+Ces dernières ne doivent pas être parfaitement corrélées entre elles. En effet dans la solution estimée du coefficient $\beta$, on devra inversé la matrice X des variables explicatives. De ce fait une corrélation impliquera que la matrice ne soit pas de rang plein, donc non inversible.
+$$\hat\beta = (X'X)^{-1}(X'y)$$
+Commençons par selectionner nos variables pour la régression linéaire multiple.
+```{r}
+
+library(dplyr)
+lmMultpleDF = Communities %>% select(murders,pop, persUrban, persPoverty,
+                           kidsBornNevrMarr, numForeignBorn,
+                           houseVacant, persEmergShelt, persHomeless)
+
+```
+
+### Entraînement de modèle{-}
+Le langage R permet d'entraîner le modèle linéaire multiple grâce à la fonction `lm()`. Pour indiquer à la fonction que nous sommes dans le cas d’une régression multiple, l’argument `formula()` doit recevoir `y~X1+X2+...+XP` et pour notre exemple `murders~pop+persUrban+...`.
+Lors qu’on précise l’argument data de la fonction lm et que les données ne contiennent que les variables à étudier, l’argument formula peut dans ce cas recevoir juste `y~.`. En Pratique, pour notre jeu de données `lmMultpleDF`, voici le code approprié :
+```{r}
+# train test split
+lmMultiple_Test = lmMultpleDF[echantillon,]
+lmMultiple_Train = lmMultpleDF[-echantillon,]
+# Model training
+lmMultiple = lm(formula =  murders~.,data = lmMultiple_Train)
+summary(lmMultiple)
+```
+
+La sortie de la fonction `summary()` indique qu’on peut se passer de la variable `persUrban` dans l’explication de `murders` par un modèle linéaire. En effet, son coefficient $\beta$ pourrait être nul car les $p-values$ est supérieure à $\alpha=5\%$.\
+
+```{r}
+library(dplyr)
+## Train test split
+lmMultpleDF = lmMultpleDF %>% select(-persUrban)
+lmMultiple_Test = lmMultpleDF[echantillon,]
+lmMultiple_Train = lmMultpleDF[-echantillon,]
+# Model training
+lmMultiple = lm(formula =  murders~.,data = lmMultiple_Train)
+summary(lmMultiple)
+```
+
+De plus, le coefficient d’ajustement $R^2$ est de $0.9747$, soit un score de $97.47\%$ pour notre modèle ce qui est un très bon résultat. 
+
+### Graphes de régression{-}
+
+Lorsque le nombre de variables explicatives dépasse $2$, il est impossible de représenter sur un même graphes le nuage de points formé par y. En effet la dimension physique maximale est de 3. 
+Il existe plusieurs packages qui donnent des représentations assez significatives en deux dimensions du modèle linéaire multiple tel que `car`^[package car : https://cran.r-project.org/web/packages/car/index.html].\
+La représentation de la droite de régression peut se faire sur chaque dimension des variables explicatives grâce à la fonction `avPlots()` de la librairie `car`.
+
+```{r message=FALSE, warning=FALSE}
+library(car)
+avPlots(lmMultiple)
+```
+
+### Prédiction{-}
+
+La prédiction dans le modèle linéaire multiple se fait aussi avec la fonction `predict()` comme dans le cas simple. On va utiliser notre modèle déjà entraîné  avec $75\%$ de notre jeu de données `lmMultpleDF` et les $20\%$ pour effectuer une prédiction. Cela peut nous permettre de voir les résidus entre les valeurs prédites et les valeurs réelles de $y$.
+
+```{r}
+y_hat = predict(lmMultiple,lmMultiple_Test[,-1])
+head(y_hat,10)
+```
+
+### Graphe des résidus{}
+On peut visualiser les résidus entre les variables $y_i$ observés et les $\hat y_i$ prédites :
+```{r ,message=FALSE,warning=FALSE,fig.cap="Les résidus sont assez proches de 0 cela  reflète la bonne qualité du modèle."}
+y_test = lmMultiple_Test$murders
+ggplot() +
+  geom_point(aes(x = y_test, y = y_hat)) +
+  geom_abline(slope = 1, color ='blue') +
+  geom_segment(aes(x =y_test , 
+                   y = y_test, xend = y_test, yend = y_hat),
+               color = 'red') +
+  ylab("Predicted murders")+xlab("Murders")
+
+```
+
+
+

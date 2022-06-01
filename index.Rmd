@@ -8,10 +8,34 @@ bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+  Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de     crime aux Etats-Unis.
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: https://github.com/AODiakite/Data-Analysis
 ---
+# Introduction{-} 
 
+Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de crime aux Etats-Unis. Pour se faire, nous disposons d’un jeu de disponible sur GitHub que nous appellerons `Comminities`([_Télécharger_](https://github.com/AODiakite/Data-Analysis/blob/main/data/Communities.csv)) dorénavant.\
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+Communities = read.csv("data/Communities.csv",row.names = 1)
+```
+```{r , echo=FALSE}
+knitr::kable(head(Communities[,1:5],5))
+```
+
+
+## Description du jeu de données{-}
+
+Le jeu de données dispose de 147 variables pour 2215 observations. Les valeurs manquantes sont représentées par `"?"`.\
+De nombreuses variables sont incluses afin que les algorithmes qui sélectionnent ou apprennent les poids des attributs puissent être testés. Cependant, les attributs clairement non liés n'ont pas été inclus; les attributs ont été sélectionnés s'il y avait un lien plausible avec la criminalité (N = 125), plus les variables de criminalité qui sont des variables dépendantes potentielles. Les variables incluses dans l'ensemble de données impliquent la communauté, telles que le pourcentage de la population considérée comme urbaine et le revenu familial médian, et impliquent l'application de la loi, telles que le nombre d'agents de police par habitant et le pourcentage d'agents affectés aux unités de lutte contre la drogue. Les attributs de crime (N = 18) qui pourraient être prédits sont les 8 crimes considérés comme des «crimes indexés» par le FBI (Meurtres, viols, vols qualifiés, .... ), versions par habitant (en fait pour 100 000 habitants) de chacun, et crimes violents par habitant et crimes non violents par habitant).\
+Pour faciliter la tâche aux lecteurs de se projet, nous avons créés un fichier csv nommé `Description.csv`([_Télécharger_](https://github.com/AODiakite/Data-Analysis/blob/main/data/Description.csv)) qui contient les noms des variables dans la colonne `feature` et leur descriptions dans la colonne `Description`
+
+```{r,echo=FALSE}
+description = read.csv("data/Description.csv",row.names = 1)
+```
+```{r,echo=FALSE}
+knitr::kable(head(description))
+```
+
+## Source des données{-}
+
+(UCI Machine Learning)^[UCI Machine Learning : https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime+Unnormalized#]

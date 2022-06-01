@@ -1,0 +1,28 @@
+\contentsline {chapter}{Introduction}{5}{chapter*.2}%
+\contentsline {section}{Description du jeu de données}{5}{section*.3}%
+\contentsline {section}{Source des données}{6}{section*.4}%
+\contentsline {chapter}{\numberline {1}Régression linéaire}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{7}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Application de la régression linéaire simple}{8}{section.1.2}%
+\contentsline {subsection}{Corrélation}{8}{section*.5}%
+\contentsline {subsection}{Nuage de points}{9}{section*.6}%
+\contentsline {subsection}{Entraînement de modèle \& Droite de régression}{10}{section*.7}%
+\contentsline {subsection}{Prédiction}{12}{section*.8}%
+\contentsline {subsection}{Graphes des résidus}{12}{section*.9}%
+\contentsline {section}{\numberline {1.3}Application de la régression linéaire multiple}{13}{section.1.3}%
+\contentsline {subsection}{Entraînement de modèle}{14}{section*.10}%
+\contentsline {subsection}{Graphes de régression}{16}{section*.11}%
+\contentsline {subsection}{Prédiction}{17}{section*.12}%
+\contentsline {subsection}{\numberline {1.3.1}Graphe des résidus}{17}{subsection.1.3.1}%
+\contentsline {chapter}{\numberline {2}Principal Component Analysis and Factor Analysis}{19}{chapter.2}%
+\contentsline {subsection}{Sélection des variables numériques}{19}{section*.13}%
+\contentsline {subsection}{Application de la fonction PCA}{19}{section*.14}%
+\contentsline {subsection}{Pourcentage d'explication}{19}{section*.15}%
+\contentsline {subsection}{Graphiques de corrélation des variables}{21}{section*.16}%
+\contentsline {subsection}{Graphes des individus}{22}{section*.17}%
+\contentsline {subsection}{Biplot individus et variables}{23}{section*.18}%
+\contentsline {chapter}{\numberline {3}L'analyse de la variance}{27}{chapter.3}%
+\contentsline {subsection}{Sélection des données}{27}{section*.19}%
+\contentsline {subsection}{Les boites à moustaches}{27}{section*.20}%
+\contentsline {subsection}{Application de l'anova à un facteur}{28}{section*.21}%
+\contentsline {chapter}{References}{31}{chapter*.22}%
