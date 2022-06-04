@@ -79,7 +79,7 @@ fig
 ```
 
 ### Entraînement de modèle & Droite de régression{-}
-La figure précédente laisse parraître qu'il pourrait effectivement exister une relation linéaire entre `murders` et `persPoverty`. Appliquons la fonction `lm()` pour voir ce qu'il en est vraiment ! Pour faire une analyse des résidus pltard, nous n'entrainerons que $75\%$ du jeu de données et le reste servira à la prédiction.\
+La figure précédente laisse parraître qu'il pourrait effectivement exister une relation linéaire entre `murders` et `persPoverty`. Appliquons la fonction `lm()` pour voir ce qu'il en est vraiment ! Pour faire une analyse des résidus plutard, nous n'entrainerons que $75\%$ du jeu de données et le reste servira à la prédiction.\
 
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)

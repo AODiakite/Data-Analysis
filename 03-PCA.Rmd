@@ -1,4 +1,4 @@
-# Principal Component Analysis and Factor Analysis
+# Principal Component Analysis
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 Communities = read.csv("data/Communities.csv",row.names = 1)
 ```
