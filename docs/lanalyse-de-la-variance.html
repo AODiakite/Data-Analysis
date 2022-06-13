@@ -10,7 +10,7 @@
 
   <meta property="og:title" content="3 L’analyse de la variance | Annalyse de données" />
   <meta property="og:type" content="book" />
-  
+  <meta property="og:image" content="https://bookdown.org/AODiakite/data-analysis/Data.png" />
   <meta property="og:description" content="Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de crime aux Etats-Unis." />
   <meta name="github-repo" content="AODiakite/Data-Analysis" />
 
@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="3 L’analyse de la variance | Annalyse de données" />
   
   <meta name="twitter:description" content="Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de crime aux Etats-Unis." />
-  
+  <meta name="twitter:image" content="https://bookdown.org/AODiakite/data-analysis/Data.png" />
 
 <meta name="author" content="Abdoul Oudouss Diakite, Othmane ETTADLAOUI" />
 
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="principal-component-analysis-and-factor-analysis.html"/>
+<link rel="prev" href="principal-component-analysis.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -159,14 +159,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.1" data-path="linearModel.html"><a href="linearModel.html#graphe-des-résidus"><i class="fa fa-check"></i><b>1.3.1</b> Graphe des résidus</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html"><i class="fa fa-check"></i><b>2</b> Principal Component Analysis and Factor Analysis</a>
+<li class="chapter" data-level="2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>2</b> Principal Component Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#sélection-des-variables-numériques"><i class="fa fa-check"></i>Sélection des variables numériques</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#application-de-la-fonction-pca"><i class="fa fa-check"></i>Application de la fonction PCA</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#pourcentage-dexplication"><i class="fa fa-check"></i>Pourcentage d’explication</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#graphiques-de-corrélation-des-variables"><i class="fa fa-check"></i>Graphiques de corrélation des variables</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#graphes-des-individus"><i class="fa fa-check"></i>Graphes des individus</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#biplot-individus-et-variables"><i class="fa fa-check"></i>Biplot individus et variables</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#sélection-des-variables-numériques"><i class="fa fa-check"></i>Sélection des variables numériques</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#application-de-la-fonction-pca"><i class="fa fa-check"></i>Application de la fonction PCA</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#pourcentage-dexplication"><i class="fa fa-check"></i>Pourcentage d’explication</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#graphiques-de-corrélation-des-variables"><i class="fa fa-check"></i>Graphiques de corrélation des variables</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#graphes-des-individus"><i class="fa fa-check"></i>Graphes des individus</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#biplot-individus-et-variables"><i class="fa fa-check"></i>Biplot individus et variables</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="lanalyse-de-la-variance.html"><a href="lanalyse-de-la-variance.html"><i class="fa fa-check"></i><b>3</b> L’analyse de la variance</a>
 <ul>
@@ -197,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="lanalyse-de-la-variance" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> L’analyse de la variance<a href="lanalyse-de-la-variance.html#lanalyse-de-la-variance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Dans cette section on va s’intéresser aux meurtres commis par unité de gang déployé <code>gangUnit</code>. Pour cette dernière, l’encodage est le suivant : 0 signifie “Meaning”, 10 signifie “Oui” et 5 signifie temps partiel(“Part-Time”).<br />
+<p>Dans cette section on va s’intéresser aux meurtres commis par unité de gang déployé <code>gangUnit</code>. Pour cette dernière, l’encodage est le suivant : 0 signifie “Non”, 10 signifie “Oui” et 5 signifie temps partiel(“Part-Time”).<br />
 </p>
 <div id="sélection-des-données" class="section level3 unnumbered hasAnchor">
 <h3>Sélection des données<a href="lanalyse-de-la-variance.html#sélection-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -251,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="principal-component-analysis-and-factor-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="principal-component-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

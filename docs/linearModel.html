@@ -10,7 +10,7 @@
 
   <meta property="og:title" content="1 Régression linéaire | Annalyse de données" />
   <meta property="og:type" content="book" />
-  
+  <meta property="og:image" content="https://bookdown.org/AODiakite/data-analysis/Data.png" />
   <meta property="og:description" content="Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de crime aux Etats-Unis." />
   <meta name="github-repo" content="AODiakite/Data-Analysis" />
 
@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="1 Régression linéaire | Annalyse de données" />
   
   <meta name="twitter:description" content="Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de crime aux Etats-Unis." />
-  
+  <meta name="twitter:image" content="https://bookdown.org/AODiakite/data-analysis/Data.png" />
 
 <meta name="author" content="Abdoul Oudouss Diakite, Othmane ETTADLAOUI" />
 
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="principal-component-analysis-and-factor-analysis.html"/>
+<link rel="next" href="principal-component-analysis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -159,14 +159,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.1" data-path="linearModel.html"><a href="linearModel.html#graphe-des-résidus"><i class="fa fa-check"></i><b>1.3.1</b> Graphe des résidus</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html"><i class="fa fa-check"></i><b>2</b> Principal Component Analysis and Factor Analysis</a>
+<li class="chapter" data-level="2" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html"><i class="fa fa-check"></i><b>2</b> Principal Component Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#sélection-des-variables-numériques"><i class="fa fa-check"></i>Sélection des variables numériques</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#application-de-la-fonction-pca"><i class="fa fa-check"></i>Application de la fonction PCA</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#pourcentage-dexplication"><i class="fa fa-check"></i>Pourcentage d’explication</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#graphiques-de-corrélation-des-variables"><i class="fa fa-check"></i>Graphiques de corrélation des variables</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#graphes-des-individus"><i class="fa fa-check"></i>Graphes des individus</a></li>
-<li class="chapter" data-level="" data-path="principal-component-analysis-and-factor-analysis.html"><a href="principal-component-analysis-and-factor-analysis.html#biplot-individus-et-variables"><i class="fa fa-check"></i>Biplot individus et variables</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#sélection-des-variables-numériques"><i class="fa fa-check"></i>Sélection des variables numériques</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#application-de-la-fonction-pca"><i class="fa fa-check"></i>Application de la fonction PCA</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#pourcentage-dexplication"><i class="fa fa-check"></i>Pourcentage d’explication</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#graphiques-de-corrélation-des-variables"><i class="fa fa-check"></i>Graphiques de corrélation des variables</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#graphes-des-individus"><i class="fa fa-check"></i>Graphes des individus</a></li>
+<li class="chapter" data-level="" data-path="principal-component-analysis.html"><a href="principal-component-analysis.html#biplot-individus-et-variables"><i class="fa fa-check"></i>Biplot individus et variables</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="lanalyse-de-la-variance.html"><a href="lanalyse-de-la-variance.html"><i class="fa fa-check"></i><b>3</b> L’analyse de la variance</a>
 <ul>
@@ -490,7 +490,7 @@ X = \begin{pmatrix}
 </div>
 <div id="entraînement-de-modèle-droite-de-régression" class="section level3 unnumbered hasAnchor">
 <h3>Entraînement de modèle &amp; Droite de régression<a href="linearModel.html#entraînement-de-modèle-droite-de-régression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>La figure précédente laisse parraître qu’il pourrait effectivement exister une relation linéaire entre <code>murders</code> et <code>persPoverty</code>. Appliquons la fonction <code>lm()</code> pour voir ce qu’il en est vraiment ! Pour faire une analyse des résidus pltard, nous n’entrainerons que <span class="math inline">\(75\%\)</span> du jeu de données et le reste servira à la prédiction.<br />
+<p>La figure précédente laisse parraître qu’il pourrait effectivement exister une relation linéaire entre <code>murders</code> et <code>persPoverty</code>. Appliquons la fonction <code>lm()</code> pour voir ce qu’il en est vraiment ! Pour faire une analyse des résidus plutard, nous n’entrainerons que <span class="math inline">\(75\%\)</span> du jeu de données et le reste servira à la prédiction.<br />
 </p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="linearModel.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb5-2"><a href="linearModel.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Train_Test_Splite</span></span>
@@ -708,7 +708,7 @@ Figure 1.3: Les résidus sont assez proches de 0 cela reflète la bonne qualité
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="principal-component-analysis-and-factor-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="principal-component-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

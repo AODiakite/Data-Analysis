@@ -2,7 +2,7 @@
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 Communities = read.csv("data/Communities.csv",row.names = 1)
 ```
-Dans cette section on va s’intéresser aux meurtres commis par unité de gang déployé `gangUnit`. Pour cette dernière, l'encodage est le suivant : 0 signifie "Meaning", 10 signifie "Oui" et 5 signifie temps partiel("Part-Time").\
+Dans cette section on va s’intéresser aux meurtres commis par unité de gang déployé `gangUnit`. Pour cette dernière, l'encodage est le suivant : 0 signifie "Non", 10 signifie "Oui" et 5 signifie temps partiel("Part-Time").\
 
 ### Sélection des données{-}
 

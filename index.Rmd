@@ -5,16 +5,15 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
+url: https://bookdown.org/AODiakite/data-analysis/
+cover-image: Data.png
 description: |
   Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de     crime aux Etats-Unis.
 link-citations: yes
 github-repo: AODiakite/Data-Analysis
 ---
 # Introduction{-} 
-
-Ce projet d’analyse de donnés consiste à l’explication de différentes manières le nombre de crime aux Etats-Unis. Pour se faire, nous disposons d’un jeu de disponible sur GitHub que nous appellerons `Comminities`([_Télécharger_](https://github.com/AODiakite/Data-Analysis/blob/main/data/Communities.csv)) dorénavant.\
+Ce projet d’analyse de donnés consiste à l’explication de différentes manières du nombre de crime aux Etats-Unis. Pour se faire, nous disposons d’un jeu de disponible sur GitHub que nous appellerons `Comminities`([_Télécharger_](https://github.com/AODiakite/Data-Analysis/blob/main/data/Communities.csv)) dorénavant.\
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 Communities = read.csv("data/Communities.csv",row.names = 1)
 ```
